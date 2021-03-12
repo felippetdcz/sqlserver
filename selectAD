@@ -1,0 +1,487 @@
+SELECT CASE 
+		WHEN [sAMAccountName] IS NULL
+			THEN '-'
+		WHEN [sAMAccountName] = ''
+			THEN '-'
+		ELSE CAST(LOWER(LTRIM(RTRIM([sAMAccountName]))) AS VARCHAR(MAX)) COLLATE SQL_Latin1_General_CP1253_CI_AI
+		END AS [login]
+	,CASE 
+		WHEN [displayName] IS NULL
+			THEN '-'
+		WHEN [displayName] = ''
+			THEN '-'
+		ELSE CAST(UPPER(LTRIM(RTRIM([displayName]))) AS VARCHAR(MAX)) COLLATE SQL_Latin1_General_CP1253_CI_AI
+		END AS [nome]
+	,CASE 
+		WHEN [distinguishedName] IS NULL
+			THEN '-'
+		WHEN [distinguishedName] = ''
+			THEN '-'
+		ELSE CAST([distinguishedName] AS VARCHAR(MAX)) COLLATE SQL_Latin1_General_CP1253_CI_AI
+		END AS [path]
+	,CASE 
+		WHEN [mail] IS NULL
+			THEN '-'
+		WHEN [mail] = ''
+			THEN '-'
+		ELSE CAST([mail] AS VARCHAR(MAX)) COLLATE SQL_Latin1_General_CP1253_CI_AI
+		END AS [email]
+	,CASE 
+		WHEN [userAccountControl] IS NULL
+			THEN '-'
+		WHEN [userAccountControl] = ''
+			THEN '-'
+		ELSE CAST([userAccountControl] AS VARCHAR(MAX)) COLLATE SQL_Latin1_General_CP1253_CI_AI
+		END AS [status]
+	,CASE 
+		WHEN [lastLogon] IS NULL
+			THEN '-'
+		WHEN [lastLogon] = ''
+			THEN '-'
+		WHEN [lastLogon] = '0'
+			THEN '-'
+		ELSE CONVERT(VARCHAR, DATEADD(DAY, CAST([lastLogon] AS BIGINT) / 600000000 / 1440 - (DATEDIFF(DD, '1/1/1900', DATEADD(YY, 299, '1/1/1900'))), '1/1/1900'), 111)
+		END AS [last_logon]
+	,CASE 
+		WHEN [department] IS NULL
+			THEN '-'
+		WHEN [department] = ''
+			THEN '-'
+		ELSE CAST(UPPER(LTRIM(RTRIM([department]))) AS VARCHAR(MAX)) COLLATE SQL_Latin1_General_CP1253_CI_AI
+		END AS [id]
+FROM (
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''a*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''b*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''c*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''d*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''e*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''f*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''g*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''h*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''i*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''j*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''k*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''l*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''m*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''n*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''o*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''p*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''q*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''r*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''s*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''t*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''u*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''v*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''w*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''x*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''y*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, '
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person'' AND objectClass = ''user'' AND userAccountControl <> ''514'' AND sAMAccountName = ''z*''
+ ')
+	
+	UNION
+	
+	SELECT TOP 901 *
+	FROM OPENQUERY(ADSI, 
+			'
+  SELECT sAMAccountName
+   , displayName
+   , mail
+   , distinguishedName
+   , userAccountControl
+   , lastLogon
+   , department
+  FROM ''LDAP://OU=Nome_Da_OrganisationUnit,DC=Nome_Do_DomainController,DC=Tipo_Do_Domínio''
+  WHERE objectCategory = ''person''
+     AND objectClass = ''user''
+	 AND userAccountControl <> ''514''
+     AND (
+	 sAMAccountName <> ''a*''
+	 and sAMAccountName <> ''b*''
+	 and sAMAccountName <> ''c*''
+	 and sAMAccountName <> ''d*''
+	 and sAMAccountName <> ''e*''
+	 and sAMAccountName <> ''f*''
+	 and sAMAccountName <> ''g*''
+	 and sAMAccountName <> ''h*''
+	 and sAMAccountName <> ''i*''
+	 and sAMAccountName <> ''j*''
+	 and sAMAccountName <> ''k*''
+     and sAMAccountName <> ''l*''
+	 and sAMAccountName <> ''m*''
+	 and sAMAccountName <> ''n*''
+	 and sAMAccountName <> ''o*''
+	 and sAMAccountName <> ''p*''
+	 and sAMAccountName <> ''q*''
+	 and sAMAccountName <> ''r*''
+	 and sAMAccountName <> ''s*''
+	 and sAMAccountName <> ''t*''
+	 and sAMAccountName <> ''u*''
+	 and sAMAccountName <> ''v*''
+	 and sAMAccountName <> ''w*''
+	 and sAMAccountName <> ''x*''
+	 and sAMAccountName <> ''y*''
+	 and sAMAccountName <> ''z*'')
+ '
+		)
+	) AS main
+WHERE [userAccountControl] IS NOT NULL /* and [department] is null */;
